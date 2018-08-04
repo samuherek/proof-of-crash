@@ -1,12 +1,16 @@
 const theme = {
   colors: {
-    background: '#000000', // BLACK
+    background: '#141514', // BLACK
     base: '#232323', // Black
     secondary: '#e9e9e9', // Medium Gray
     tertiary: '#f3f3f3', // Light Gray
-    highlight: '#41D0A0', // Light Blue
+    highlight: '#42CFA0', // NEON
     highlightText: '#fff', // WHITE
-    readingText: '#3a3a3a' // Lighter black
+    readingText: '#a0a0a0', // Lighter black
+    white: '#fff'
+  },
+  transition: {
+    curve: 'cubic-bezier(.22,.65,.94,.52)'
   },
   fonts: {
     strong:

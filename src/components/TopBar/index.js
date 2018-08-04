@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { darken } from 'polished';
 
 // COMPONENTS
 
@@ -14,6 +16,19 @@ const Wrap = styled.div`
   justify-content: space-between;
   padding: 0 15px;
   height: 50px;
+
+  a {
+    text-decoration: none;
+    color: ${props => darken(0.1, props.theme.colors.white)};
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+    transition: color 0.2s ${props => props.theme.transition.curve},
+      text-shadow 0.2s ${props => props.theme.transition.curve};
+
+    &:hover {
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      color: ${props => props.theme.colors.white};
+    }
+  }
 `;
 
 const Left = styled.div``;
@@ -44,7 +59,7 @@ export default function TopBar({}) {
         </Logo>
       </Left>
       <Right>
-        <span>Rgister</span>
+        <Link to="/account">Account</Link>
       </Right>
     </Wrap>
   );

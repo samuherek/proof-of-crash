@@ -27,6 +27,9 @@ const theme = {
     small: '35em',
     medium: '50em',
     large: '70em'
+  },
+  layout: {
+    topBar: '60px'
   }
 };
 

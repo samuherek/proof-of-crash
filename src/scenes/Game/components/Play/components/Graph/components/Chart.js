@@ -32,48 +32,35 @@ const Crash = styled.span`
 export default class Chart extends Component {
   constructor() {
     super();
-    this.state = {
-      interval: 20,
-      playing: true
-    };
+    this.drawCanvas = this.drawCanvas.bind(this);
   }
 
   componentDidMount() {
-    let counter = 1;
-    const { udateCounter } = this.props;
-
     this.ctx = this.canvas.getContext('2d');
     this.ctx.font = "50px 'Ubuntu Mono'";
     this.ctx.fillStyle = 'white';
     this.ctx.textBaseline = 'middle';
-
-    this.interval = setInterval(() => {
-      if (this.props.crashAt > counter) {
-        counter = +(counter + 0.01).toFixed(2);
-        udateCounter(counter);
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.fillText(
-          `${String(counter.toFixed(2))}x`,
-          this.canvas.width / 4,
-          this.canvas.height / 2
-        );
-      } else {
-        this.setState({ playing: false });
-        clearInterval(this.interval);
-      }
-    }, this.state.interval);
   }
 
   componentDidUpdate() {
-    if (!this.state.playing) this.props.onCrashFinish();
+    if (this.props.playing) {
+      this.drawCanvas();
+    }
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+  drawCanvas() {
+    const { playCounterValue } = this.props;
+
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillText(
+      `${String(playCounterValue.toFixed(2))}x`,
+      this.canvas.width / 4,
+      this.canvas.height / 2
+    );
   }
 
   render() {
-    const { playing } = this.state;
+    const { playing } = this.props;
 
     return (
       <Wrap>

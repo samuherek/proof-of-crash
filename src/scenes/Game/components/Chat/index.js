@@ -29,6 +29,10 @@ const Tab = styled.span`
   opacity: ${props => (props.active ? '1' : '0.5')};
   display: inline-block;
   position: relative;
+  font-family: 'Lato';
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
 
   &:after {
     content: '';
@@ -43,16 +47,17 @@ const Tab = styled.span`
 `;
 
 const MessageWrap = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 13px;
 `;
 
 const Username = styled.span`
   margin-right: 10px;
-  opacity: 0.5;
+  opacity: 0.4;
   display: block;
-  font-size: 11px;
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  margin-bottom: 2px;
   color: ${props => (props.colored ? 'white' : 'red')};
 `;
 
@@ -118,7 +123,9 @@ const ChatInput = styled.input`
   }
 `;
 
-const Message = styled.span``;
+const Message = styled.span`
+  color: #a0a0a0;
+`;
 
 // MODULE
 export default class Chat extends Component {

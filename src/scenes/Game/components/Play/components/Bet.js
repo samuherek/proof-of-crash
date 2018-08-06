@@ -86,6 +86,7 @@ const DetailWrap = styled.div`
   display: flex;
   align-items: center;
   margin-left: 15px;
+  width: 100%;
 
   input {
     text-align: right;
@@ -118,12 +119,14 @@ const CurrencyWrap = DetailWrap.extend`
   input {
     width: 130px;
     padding-right: 60px;
+    width: 100%;
   }
 `;
 
 const AutoWrap = DetailWrap.extend`
   input {
     width: 80px;
+    width: 100%;
   }
 `;
 
@@ -138,8 +141,7 @@ export default class Bet extends Component {
   }
 
   render() {
-    const { isCountDonw, counterValue } = this.props;
-    console.log(counterValue);
+    const { isCountDonw, playCounterValue } = this.props;
 
     return (
       <Wrap isCountDonw={isCountDonw}>
@@ -169,7 +171,7 @@ export default class Bet extends Component {
         </AutoWrap>
         <Button2
           onClick={() => {
-            console.log(counterValue);
+            console.log(playCounterValue);
           }}
         >
           Plce bet

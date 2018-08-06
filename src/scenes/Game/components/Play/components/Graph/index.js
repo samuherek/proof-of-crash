@@ -20,14 +20,14 @@ const Wrap = styled.div`
 // MODULE
 export default class Graph extends Component {
   render() {
-    const { countDown, onCountDownFinish, onPlayFinish, crashAt, playCounterValue } = this.props;
-
-    if (this.times > 2)
-      return (
-        <Wrap>
-          <span>That is enough for now</span>
-        </Wrap>
-      );
+    const {
+      countDown,
+      onCountDownFinish,
+      onPlayFinish,
+      crashAt,
+      playCounterValue,
+      playing
+    } = this.props;
 
     if (countDown) {
       return (
@@ -39,7 +39,12 @@ export default class Graph extends Component {
 
     return (
       <Wrap>
-        <Chart onCrashFinish={onPlayFinish} crashAt={crashAt} playCounterValue={playCounterValue} />
+        <Chart
+          playing={playing}
+          onCrashFinish={onPlayFinish}
+          crashAt={crashAt}
+          playCounterValue={playCounterValue}
+        />
       </Wrap>
     );
   }

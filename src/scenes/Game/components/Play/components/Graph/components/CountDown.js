@@ -10,20 +10,19 @@ import styled, { keyframes } from 'styled-components';
 // STYLES
 const pulse = keyframes`
   0% {
-    top: -1px;
-    border-width: 2px;
+    // top: -1px;
     box-shadow: 0 0 0 0 rgba(66, 207, 160, 0.4);
   }
   
-  50% {
-    top: 2px;
-  }
+  // 50% {
+  //   top: 2px;
+  // }
 
   70% {
       box-shadow: 0 0 0 30px rgba(66, 207, 160, 0);
   }
   100% {
-    top: -1px;
+    // top: -1px;
       box-shadow: 0 0 0 0 rgba(66, 207, 160, 0);
   }
 `;
@@ -49,7 +48,7 @@ const NumberWrap = styled.div`
   position: relative;
   top: 0;
   box-shadow: 0 0 0 rgba(66, 207, 160, 0.4);
-  // animation: ${pulse} 1s infinite;
+  animation: ${pulse} 1s infinite;
   animation-delay: 0.8s;
 `;
 
@@ -77,12 +76,12 @@ export default class CountDown extends Component {
     this.state = {
       timer: 0
     };
-    this.timer = 5;
+    this.timeout = 5;
   }
 
   componentDidMount() {
     const { onCountDownFinish } = this.props;
-    this.setState({ timer: this.timer });
+    this.setState({ timer: this.timeout });
 
     this.interval = setInterval(() => {
       if (this.state.timer <= 1) {
@@ -92,6 +91,10 @@ export default class CountDown extends Component {
       }
       this.setState({ timer: this.state.timer - 1 });
     }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {

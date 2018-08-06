@@ -61,6 +61,16 @@ const PlayeresWrap = styled.div`
   }
 `;
 
+// const GraphBetWrap = styled.div`
+//   display: flex;
+//   min-height: 300px;
+//   height: 50vh;
+
+//   & > div {
+//     flex: 1;
+//   }
+// `;
+
 // MODULE
 export default function GameScene({}) {
   return (

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // COMPONENTS
+import Chart from './components/Chart';
+import CountDown from './components/CountDown';
 
 // ACTIONS/CONFIG
 
@@ -11,8 +13,8 @@ import styled from 'styled-components';
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
-  min-height: 300px;
-  height: 50vh;
+  min-height: 250px;
+  height: 40vh;
 `;
 
 // MODULE
@@ -20,75 +22,29 @@ export default class Graph extends Component {
   constructor() {
     super();
     this.state = {
-      width: 500,
-      height: 300,
-      xPosition: 20,
-      yPosition: 20,
-      rectWidth: 150,
-      rectHeight: 50
+      countDown: true
     };
+    this.handleCountDownFinish = this.handleCountDownFinish.bind(this);
   }
 
-  componentDidMount() {
-    const canvas = this.graph;
-    canvas.style.backgroundColor = 'black';
-    this.canvasContext = canvas.getContext('2d');
-    this.resetBoard();
+  handleCountDownFinish() {
+    this.setState({ countDown: false });
   }
-
-  resetBoard = () => {
-    // clearInterval(this.downInterval) //clear timer
-    this.removeRect(); //clear canvas
-    this.setState({
-      xPosition: 20,
-      yPosition: 20,
-      rectWidth: 150,
-      rectHeight: 50
-    });
-    this.drawShape();
-    //restart timer
-    // this.downInterval = setInterval(()=>{
-    //   this.computerMove()
-    // },this.state.timerInterval)
-  };
-
-  drawShape = () => {
-    this.canvasContext.fillStyle = 'red';
-    this.canvasContext.strokeStyle = '#42CFA0';
-    this.canvasContext.lineWidth = 2;
-    this.canvasContext.shadowOffsetX = 0;
-    this.canvasContext.shadowOffsetY = 0;
-    this.canvasContext.shadowBlur = 15;
-    this.canvasContext.shadowColor = 'white';
-    this.canvasContext.beginPath();
-    this.canvasContext.moveTo(0, 300);
-    this.canvasContext.lineTo(500, 0);
-    // this.canvasContext.fillRect(
-    //   this.state.xPosition,
-    //   this.state.yPosition,
-    //   this.state.rectWidth,
-    //   this.state.rectHeight
-    // );
-    this.canvasContext.stroke();
-  };
-
-  removeRect = () => {
-    const { width, height } = this.state;
-    this.canvasContext.clearRect(0, 0, width, height);
-  };
 
   render() {
-    const { width, height } = this.state;
+    const { countDown } = this.state;
+
+    if (countDown) {
+      return (
+        <Wrap>
+          <CountDown onCountDownFinish={this.handleCountDownFinish} />
+        </Wrap>
+      );
+    }
+
     return (
       <Wrap>
-        <canvas
-          ref={el => {
-            this.graph = el;
-          }}
-          id="myCanvas"
-          width={width}
-          height={height}
-        />
+        <Chart />
       </Wrap>
     );
   }

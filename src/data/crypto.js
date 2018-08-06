@@ -1,0 +1,33 @@
+const crypto = [
+  { name: 'Litecoin', symbol: 'LTC' },
+  { name: 'Namecoin', symbol: 'NMC' },
+  { name: 'Terracoin', symbol: 'TRC' },
+  { name: 'Peercoin', symbol: 'PPC' },
+  { name: 'Novacoin', symbol: 'NVC' },
+  { name: 'Feathercoin', symbol: 'FTC' },
+  { name: 'Mincoin', symbol: 'MNC' },
+  { name: 'Freicoin', symbol: 'FRC' },
+  { name: 'Ixcoin', symbol: 'IXC' },
+  { name: 'BitBar', symbol: 'BTB' },
+  { name: 'WorldCoin', symbol: 'WDC' },
+  { name: 'Digitalcoin', symbol: 'DGC' },
+  { name: 'GoldCoin', symbol: 'GLD' },
+  { name: 'Argentum', symbol: 'ARG' },
+  { name: 'Fastcoin', symbol: 'FST' },
+  { name: 'Phoenixcoin', symbol: 'PXC' },
+  { name: 'Megacoin', symbol: 'MEC' },
+  { name: 'Infinitecoin', symbol: 'IFC' },
+  { name: 'Primecoin', symbol: 'XPM' },
+  { name: 'Anoncoin', symbol: 'ANC' },
+  { name: 'CasinoCoin', symbol: 'CSC' },
+  { name: 'Bullion', symbol: 'CBX' },
+  { name: 'Emerald Crypto', symbol: 'EMD' },
+  { name: 'XRP', symbol: 'XRP' },
+  { name: 'Quark', symbol: 'QRK' },
+  { name: 'Zetacoin', symbol: 'ZET' },
+  { name: 'SecureCoin', symbol: 'SRC' },
+  { name: 'Sexcoin', symbol: 'SXC' },
+  { name: 'TagCoin', symbol: 'TAG' }
+];
+
+export default crypto;

@@ -19,6 +19,7 @@ const THead = styled.div`
   left: 0;
   right: calc(25% + 15px);
   background: #191919;
+  z-index: 10;
 `;
 
 const TRowHead = TRow.extend`

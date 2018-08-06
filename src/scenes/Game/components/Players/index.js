@@ -10,6 +10,7 @@ import TBody from '../../../../components/Table/TBody';
 
 // ACTIONS/CONFIG
 import usernames from '../../../../data/usernames';
+import crypto from '../../../../data/crypto';
 
 // STYLES
 const Wrap = styled.div`
@@ -41,6 +42,7 @@ export default class Players extends Component {
       const player = {
         username: usernames[Math.floor(Math.random() * 83)],
         bet: Math.floor(getValue(0, 100000)),
+        symbol: crypto[Math.floor(Math.random() * 27)].symbol,
         bonus: Math.floor(getValue(0, 9) * 100) / 100,
         profit: '',
         at: ''

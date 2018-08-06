@@ -35,7 +35,10 @@ export default function TableBody({ rowSchema, data, widthGrid }) {
               <TCellInner>
                 {cell.ref === 'username' && row[cell.ref]}
                 {cell.ref === 'at' && ' - '}
-                {cell.ref === 'bet' && row[cell.ref]}
+                {cell.ref === 'bet' && [
+                  `${row[cell.ref]}`,
+                  <span key={cell.ref}>{row.symbol}</span>
+                ]}
                 {cell.ref === 'bonus' && `${row[cell.ref]}%`}
                 {cell.ref === 'profit' && ' - '}
               </TCellInner>

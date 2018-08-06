@@ -28,4 +28,9 @@ export const TCellInner = styled.span`
   overflow: hidden;
   width: 100%;
   font-family: 'Lato';
+
+  span {
+    margin-left: 10px;
+    opacity: 0.5;
+  }
 `;

@@ -15,3 +15,10 @@ export function signOut() {
     type: types.SIGN_OUT
   };
 }
+
+export function startPlay() {
+  return {
+    type: types.START_PLAY,
+    payload: {}
+  };
+}

@@ -24,6 +24,10 @@ const TBody = styled.div`
 
 const TRowBody = TRow.extend``;
 
+const numberWithCommas = x => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 // MODULE
 export default function TableBody({ rowSchema, data, widthGrid }) {
   return (
@@ -36,8 +40,10 @@ export default function TableBody({ rowSchema, data, widthGrid }) {
                 {cell.ref === 'username' && row[cell.ref]}
                 {cell.ref === 'at' && ' - '}
                 {cell.ref === 'bet' && [
-                  `${row[cell.ref]}`,
-                  <span key={cell.ref}>{row.symbol}</span>
+                  <span key={cell.ref}>
+                    <img src={row.symbol} />
+                  </span>,
+                  `${numberWithCommas(row[cell.ref])}`
                 ]}
                 {cell.ref === 'bonus' && `${row[cell.ref]}%`}
                 {cell.ref === 'profit' && ' - '}

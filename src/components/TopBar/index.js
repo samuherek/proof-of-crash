@@ -35,7 +35,10 @@ const Wrap = styled.div`
   }
 `;
 
-const Left = styled.div``;
+const Left = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Logo = styled(Link)`
   display: flex;
@@ -70,9 +73,19 @@ const Right = styled.div`
   }
 `;
 
+const Line = styled.div`
+  width: 1px;
+  height: 18px;
+  background: #484848;
+  margin: 0 25px;
+`;
+
 const BalanceWrap = styled.div`
   display: inline-block;
-  margin-right: 15px;
+`;
+
+const Label = styled.span`
+  color: #8c8c8c;
 `;
 
 const Balance = styled.span`
@@ -92,13 +105,14 @@ export default function TopBar({}) {
           </svg>
           <span>Proof of Crash</span>
         </Logo>
-      </Left>
-      <Right>
+        <Line />
         <BalanceWrap>
-          <span>Balance: </span>
+          <Label>Balance: </Label>
           <Balance>234</Balance>
           <span>ETH</span>
         </BalanceWrap>
+      </Left>
+      <Right>
         <Link to="/account">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
             <path fill="none" d="M2.4 2.4h35.2v35.2H2.4z" />

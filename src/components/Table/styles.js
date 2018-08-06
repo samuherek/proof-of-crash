@@ -28,9 +28,15 @@ export const TCellInner = styled.span`
   overflow: hidden;
   width: 100%;
   font-family: 'Lato';
+  display: flex;
+  align-items: center;
 
   span {
-    margin-left: 10px;
-    opacity: 0.5;
+    margin-right: 10px;
+  }
+
+  img {
+    width: 19px;
+    display: block;
   }
 `;

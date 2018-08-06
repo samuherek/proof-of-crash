@@ -1,13 +1,33 @@
 // NPM
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // COMPONENTS
 
 // ACTIONS/CONFIG
 
 // STYLES
+const pulse = keyframes`
+  0% {
+    top: -1px;
+    border-width: 2px;
+    box-shadow: 0 0 0 0 rgba(66, 207, 160, 0.4);
+  }
+  
+  50% {
+    top: 2px;
+  }
+
+  70% {
+      box-shadow: 0 0 0 30px rgba(66, 207, 160, 0);
+  }
+  100% {
+    top: -1px;
+      box-shadow: 0 0 0 0 rgba(66, 207, 160, 0);
+  }
+`;
+
 const Wrap = styled.div`
   display: flex;
   align-items: center;
@@ -16,26 +36,38 @@ const Wrap = styled.div`
 `;
 
 const NumberWrap = styled.div`
-  background: ${props => props.theme.colors.highlight};
+  background: ${props => props.theme.colors.background};
+  border: 2px solid ${props => props.theme.colors.highlight};
   color: ${props => props.theme.colors.white};
-  width: 80px;
-  height: 80px;
-  border-radius: 80px;
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  top: 0;
+  box-shadow: 0 0 0 rgba(66, 207, 160, 0.4);
+  // animation: ${pulse} 1s infinite;
+  animation-delay: 0.8s;
 `;
 
 const Number = styled.span`
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
+  font-family: 'Ubuntu Mono', sans-serif;
 `;
 
 const Sec = styled.span`
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
+`;
+
+const Note = styled.span`
+  margin-top: 35px;
+  opacity: 0.5;
 `;
 
 // MODULE
@@ -71,7 +103,7 @@ export default class CountDown extends Component {
           <Number>{timer}</Number>
           <Sec>sec</Sec>
         </NumberWrap>
-        <span>Before next round</span>
+        <Note>Countdown before next round</Note>
       </Wrap>
     );
   }

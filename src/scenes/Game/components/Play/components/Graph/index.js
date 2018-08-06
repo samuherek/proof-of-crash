@@ -19,32 +19,27 @@ const Wrap = styled.div`
 
 // MODULE
 export default class Graph extends Component {
-  constructor() {
-    super();
-    this.state = {
-      countDown: true
-    };
-    this.handleCountDownFinish = this.handleCountDownFinish.bind(this);
-  }
-
-  handleCountDownFinish() {
-    this.setState({ countDown: false });
-  }
-
   render() {
-    const { countDown } = this.state;
+    const { countDown, onCountDownFinish, onPlayFinish, crashAt, playCounterValue } = this.props;
+
+    if (this.times > 2)
+      return (
+        <Wrap>
+          <span>That is enough for now</span>
+        </Wrap>
+      );
 
     if (countDown) {
       return (
         <Wrap>
-          <CountDown onCountDownFinish={this.handleCountDownFinish} />
+          <CountDown onCountDownFinish={onCountDownFinish} />
         </Wrap>
       );
     }
 
     return (
       <Wrap>
-        <Chart />
+        <Chart onCrashFinish={onPlayFinish} crashAt={crashAt} playCounterValue={playCounterValue} />
       </Wrap>
     );
   }

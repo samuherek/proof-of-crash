@@ -18,6 +18,10 @@ const Button = styled.button`
   transition: background 0.1s ease-out;
   height: 36px;
   min-width: 140px;
+  font-size: 12px;
+  font-family: 'Lato';
+  letter-spacing: 1px;
+  text-transform: uppercase;
 
   &:hover {
     background-color: ${props => lighten(0.1, props.theme.colors.highlight)};

@@ -5,10 +5,9 @@ import styled from 'styled-components';
 
 // COMPONENTS
 import TopBar from '../../components/TopBar';
-import Graph from './components/Graph';
 import Chat from './components/Chat';
 import Players from './components/Players';
-import Bet from './components/Bet';
+import Play from './components/Play';
 
 // ACTIONS/CONFIG
 
@@ -78,8 +77,7 @@ export default function GameScene({}) {
       <TopBar />
       <GameWrap>
         <BettingWrap>
-          <Graph />
-          <Bet />
+          <Play />
           <PlayeresWrap>
             <Players />
           </PlayeresWrap>

@@ -1,3 +1,2 @@
-export const AUTH_DONE = 'AUTH_DONE';
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_OUT = 'SIGN_OUT';
+export const ADD_NEW_BET = 'ADD_NEW_BET';
+export const SET_ACTIVE_TOKEN = 'SET_ACTIVE_TOKEN';

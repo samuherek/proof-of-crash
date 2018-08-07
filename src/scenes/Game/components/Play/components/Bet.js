@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { connect } from 'react-redux';
 
 // COMPONENTS
 import Button from '../../../../../components/Button';
@@ -131,7 +132,7 @@ const AutoWrap = DetailWrap.extend`
 `;
 
 // MODULE
-export default class Bet extends Component {
+class Bet extends Component {
   constructor() {
     super();
   }
@@ -147,10 +148,7 @@ export default class Bet extends Component {
       <Wrap isCountDonw={isCountDonw}>
         <Arrow>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-            <path
-              class="st0"
-              d="M23.3 33.4H13.2l9.8-9.8H3.4v-7.2H23l-9.8-9.8h10.1L36.6 20 23.3 33.4z"
-            />
+            <path d="M23.3 33.4H13.2l9.8-9.8H3.4v-7.2H23l-9.8-9.8h10.1L36.6 20 23.3 33.4z" />
           </svg>
         </Arrow>
         <CurrencyWrap>
@@ -183,3 +181,14 @@ export default class Bet extends Component {
 
 // Props Validation
 Bet.propTypes = {};
+
+const mapStateToProps = state => {
+  return {
+    bet: {}
+  };
+};
+
+export default connect(
+  mapStateToProps
+  // { addNewBet }
+)(Bet);

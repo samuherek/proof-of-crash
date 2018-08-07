@@ -44,17 +44,17 @@ export default class Play extends Component {
 
   startPlay() {
     this.setNewCrashValue();
-    this.setState({ playCounterValue: 1 });
+    // this.setState({ playCounterValue: 1 });
 
-    this.playInterval = setInterval(() => {
-      if (this.state.crashAt > this.state.playCounterValue) {
-        this.setState({ playCounterValue: +(this.state.playCounterValue + 0.01).toFixed(2) });
-      } else {
-        clearInterval(this.playInterval);
-        this.setState({ playing: false });
-        this.handlePlayFinish();
-      }
-    }, this.state.interval);
+    // this.playInterval = setInterval(() => {
+    //   if (this.state.crashAt > this.state.playCounterValue) {
+    //     this.setState({ playCounterValue: +(this.state.playCounterValue + 0.01).toFixed(2) });
+    //   } else {
+    //     clearInterval(this.playInterval);
+    //     this.setState({ playing: false });
+    //     this.handlePlayFinish();
+    //   }
+    // }, this.state.interval);
   }
 
   handlePlayFinish() {

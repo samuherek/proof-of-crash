@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 // COMPONENTS
+import TokenPicker from './TokenPicker';
 
 // ACTIONS/CONFIG
 
@@ -109,7 +110,7 @@ export default function TopBar({}) {
         <BalanceWrap>
           <Label>Balance: </Label>
           <Balance>234</Balance>
-          <span>ETH</span>
+          <TokenPicker />
         </BalanceWrap>
       </Left>
       <Right>

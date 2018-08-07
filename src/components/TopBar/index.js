@@ -7,8 +7,10 @@ import { darken } from 'polished';
 
 // COMPONENTS
 import TokenPicker from './TokenPicker';
+import { connect } from '../../../node_modules/react-redux';
 
 // ACTIONS/CONFIG
+import Utils from '../../utils/Utils';
 
 // STYLES
 const Wrap = styled.div`
@@ -91,11 +93,11 @@ const Label = styled.span`
 
 const Balance = styled.span`
   color: ${props => props.theme.colors.highlight};
-  margin: 0 5px;
+  margin: 0 10px 0 15px;
 `;
 
 // MODULE
-export default function TopBar({}) {
+const TopBar = ({ balance }) => {
   return (
     <Wrap>
       <Left>
@@ -109,7 +111,7 @@ export default function TopBar({}) {
         <Line />
         <BalanceWrap>
           <Label>Balance: </Label>
-          <Balance>234</Balance>
+          <Balance>{Utils.numberWithCommas(balance)}</Balance>
           <TokenPicker />
         </BalanceWrap>
       </Left>
@@ -123,7 +125,17 @@ export default function TopBar({}) {
       </Right>
     </Wrap>
   );
-}
+};
 
 // Props Validation
-TopBar.propTypes = {};
+TopBar.propTypes = {
+  balance: PropTypes.string
+};
+
+const mapStateToProps = state => {
+  return {
+    balance: state.accounts.find(a => a.token === state.ui.activeToken).balance
+  };
+};
+
+export default connect(mapStateToProps)(TopBar);

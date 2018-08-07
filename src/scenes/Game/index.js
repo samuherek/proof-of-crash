@@ -38,26 +38,6 @@ const BettingWrap = styled.div`
 const PlayeresWrap = styled.div`
   overflow-y: auto;
   height: 50vh;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: #0f271f;
-    border-radius: 5px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: #51cda2;
-  }
 `;
 
 // const GraphBetWrap = styled.div`

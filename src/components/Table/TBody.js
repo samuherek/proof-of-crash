@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // COMPONENTS
 
 // ACTIONS/CONFIG
+import Utils from '../../utils/Utils';
 
 // STYLES
 import { TRow, TCell, TCellInner } from './styles';
@@ -24,10 +25,6 @@ const TBody = styled.div`
 
 const TRowBody = TRow.extend``;
 
-const numberWithCommas = x => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
-
 // MODULE
 export default function TableBody({ rowSchema, data, widthGrid }) {
   return (
@@ -43,7 +40,7 @@ export default function TableBody({ rowSchema, data, widthGrid }) {
                   <span key={cell.ref}>
                     <img src={row.symbol} />
                   </span>,
-                  `${numberWithCommas(row[cell.ref])}`
+                  `${Utils.numberWithCommas(row[cell.ref])}`
                 ]}
                 {cell.ref === 'bonus' && `${row[cell.ref]}%`}
                 {cell.ref === 'profit' && ' - '}

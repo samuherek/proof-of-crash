@@ -5,6 +5,26 @@ injectGlobal`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #292929;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+  }
 }
 
 html,

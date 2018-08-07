@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Button from '../../../../../components/Button';
 
 // ACTIONS/CONFIG
+import crypto from '../../../../../data/crypto';
 
 // STYLES
 const Wrap = styled.div`
@@ -122,6 +123,11 @@ const CurrencyWrap = DetailWrap.extend`
     padding-right: 60px;
     width: 100%;
   }
+
+  img {
+    width: 25px;
+    display: block;
+  }
 `;
 
 const AutoWrap = DetailWrap.extend`
@@ -160,7 +166,9 @@ class Bet extends Component {
               this.input = el;
             }}
           />
-          <span>ETH</span>
+          <span>
+            <img src={crypto.find(c => c.token === this.props.activeToken).icon} />
+          </span>
         </CurrencyWrap>
         <AutoWrap>
           <label>Auto cashout at: </label>
@@ -180,11 +188,13 @@ class Bet extends Component {
 }
 
 // Props Validation
-Bet.propTypes = {};
+Bet.propTypes = {
+  activeToken: PropTypes.string
+};
 
 const mapStateToProps = state => {
   return {
-    bet: {}
+    activeToken: state.ui.activeToken
   };
 };
 

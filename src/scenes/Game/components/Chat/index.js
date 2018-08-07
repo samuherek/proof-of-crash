@@ -82,26 +82,6 @@ const ChatWrap = styled.div`
   height: 100%;
   position: relative;
   color: #e0e0e0;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: #0f271f;
-    border-radius: 5px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: #51cda2;
-  }
 `;
 
 const ChatInput = styled.input`

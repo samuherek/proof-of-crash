@@ -5,10 +5,11 @@ import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import Button from '../../../../../components/Button';
+import Button from '../../../../../../components/Button';
 
 // ACTIONS/CONFIG
-import crypto from '../../../../../data/crypto';
+import { addNewBet } from '../../../../../../actions/betActions';
+import crypto from '../../../../../../data/crypto';
 
 // STYLES
 const Wrap = styled.div`
@@ -22,7 +23,7 @@ const Wrap = styled.div`
   max-height: 80px;
 
   ${props =>
-    !props.isCountDonw &&
+    !props.playerEntryActive &&
     css`
       button {
         background: #102720;
@@ -141,6 +142,10 @@ const AutoWrap = DetailWrap.extend`
 class Bet extends Component {
   constructor() {
     super();
+    this.state = {
+      betValue: '1',
+      betAutoCash: '2'
+    };
   }
 
   componentDidMount() {
@@ -148,10 +153,10 @@ class Bet extends Component {
   }
 
   render() {
-    const { isCountDonw, playCounterValue } = this.props;
+    const { playerEntryActive, playCounterValue } = this.props;
 
     return (
-      <Wrap isCountDonw={isCountDonw}>
+      <Wrap playerEntryActive={playerEntryActive}>
         <Arrow>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
             <path d="M23.3 33.4H13.2l9.8-9.8H3.4v-7.2H23l-9.8-9.8h10.1L36.6 20 23.3 33.4z" />
@@ -189,16 +194,18 @@ class Bet extends Component {
 
 // Props Validation
 Bet.propTypes = {
-  activeToken: PropTypes.string
+  activeToken: PropTypes.string,
+  playerEntryActive: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    activeToken: state.ui.activeToken
+    activeToken: state.ui.activeToken,
+    playerEntryActive: state.ui.playerEntryActive
   };
 };
 
 export default connect(
-  mapStateToProps
-  // { addNewBet }
+  mapStateToProps,
+  { addNewBet }
 )(Bet);

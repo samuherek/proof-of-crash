@@ -8,3 +8,21 @@ export function setActiveToken(token) {
     }
   };
 }
+
+export function enablePlayerEntry() {
+  return {
+    type: types.ENABLE_PLAYER_ENTRY
+  };
+}
+
+export function disablePlayerEntry() {
+  return {
+    type: types.DISABLE_PLAYER_ENTRY
+  };
+}
+
+export function activateCrash() {
+  return {
+    type: types.ACTIVATE_CRASH
+  };
+}

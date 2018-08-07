@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 // COMPONENTS
 
@@ -29,7 +30,7 @@ const Crash = styled.span`
 `;
 
 // MODULE
-export default class Chart extends Component {
+class Chart extends Component {
   constructor() {
     super();
     this.drawCanvas = this.drawCanvas.bind(this);
@@ -43,7 +44,7 @@ export default class Chart extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.playing) {
+    if (this.props.enableCounter) {
       this.drawCanvas();
     }
   }
@@ -60,11 +61,11 @@ export default class Chart extends Component {
   }
 
   render() {
-    const { playing } = this.props;
+    const { enableCounter } = this.props;
 
     return (
       <Wrap>
-        {playing ? (
+        {enableCounter ? (
           <canvas
             ref={el => {
               this.canvas = el;
@@ -83,4 +84,14 @@ export default class Chart extends Component {
 }
 
 // Props Validation
-Chart.propTypes = {};
+Chart.propTypes = {
+  enableCounter: PropTypes.bool
+};
+
+const mapStateToProps = state => {
+  return {
+    enableCounter: !state.ui.playerEntryActive && !state.ui.crashActive
+  };
+};
+
+export default connect(mapStateToProps)(Chart);

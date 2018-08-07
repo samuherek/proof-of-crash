@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // COMPONENTS
 import Chart from './components/Chart';
 import CountDown from './components/CountDown';
+import { connect } from '../../../../../../../node_modules/react-redux';
 
 // ACTIONS/CONFIG
 
@@ -18,18 +19,17 @@ const Wrap = styled.div`
 `;
 
 // MODULE
-export default class Graph extends Component {
+class Graph extends Component {
   render() {
     const {
-      countDown,
+      playerEntryActive,
       onCountDownFinish,
       onPlayFinish,
       crashAt,
-      playCounterValue,
-      playing
+      playCounterValue
     } = this.props;
 
-    if (countDown) {
+    if (playerEntryActive) {
       return (
         <Wrap>
           <CountDown onCountDownFinish={onCountDownFinish} />
@@ -39,16 +39,21 @@ export default class Graph extends Component {
 
     return (
       <Wrap>
-        <Chart
-          playing={playing}
-          onCrashFinish={onPlayFinish}
-          crashAt={crashAt}
-          playCounterValue={playCounterValue}
-        />
+        <Chart onCrashFinish={onPlayFinish} crashAt={crashAt} playCounterValue={playCounterValue} />
       </Wrap>
     );
   }
 }
 
 // Props Validation
-Graph.propTypes = {};
+Graph.propTypes = {
+  playerEntryActive: PropTypes.bool
+};
+
+const mapStateToProps = state => {
+  return {
+    playerEntryActive: state.ui.playerEntryActive
+  };
+};
+
+export default connect(mapStateToProps)(Graph);

@@ -23,6 +23,7 @@ export default {
   },
   ui: {
     activeToken: 'REP',
-    countdown: true
+    playerEntryActive: true,
+    crashActive: false
   }
 };

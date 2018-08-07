@@ -7,17 +7,21 @@ import Bet from './components/Bet';
 import Graph from './components/Graph';
 
 // ACTIONS/CONFIG
+import {
+  disablePlayerEntry,
+  enablePlayerEntry,
+  activateCrash
+} from '../../../../actions/uiActions';
+import { connect } from '../../../../../node_modules/react-redux';
 
 // MODULE
-export default class Play extends Component {
+class Play extends Component {
   constructor() {
     super();
     this.state = {
-      countDown: true,
       playCounterValue: 1,
       crashAt: Math.floor(Math.random() * 1000) / 100 + 1,
-      interval: 30,
-      playing: false
+      interval: 30
     };
 
     this.times = 1;
@@ -39,27 +43,28 @@ export default class Play extends Component {
 
   handleCountDownFinish() {
     this.startPlay();
-    this.setState({ countDown: false, playing: true });
   }
 
   startPlay() {
+    this.props.disablePlayerEntry();
     this.setNewCrashValue();
-    // this.setState({ playCounterValue: 1 });
+    this.setState({ playCounterValue: 1 });
 
-    // this.playInterval = setInterval(() => {
-    //   if (this.state.crashAt > this.state.playCounterValue) {
-    //     this.setState({ playCounterValue: +(this.state.playCounterValue + 0.01).toFixed(2) });
-    //   } else {
-    //     clearInterval(this.playInterval);
-    //     this.setState({ playing: false });
-    //     this.handlePlayFinish();
-    //   }
-    // }, this.state.interval);
+    this.playInterval = setInterval(() => {
+      if (this.state.crashAt > this.state.playCounterValue) {
+        this.setState({ playCounterValue: +(this.state.playCounterValue + 0.01).toFixed(2) });
+      } else {
+        clearInterval(this.playInterval);
+        this.setState({ playing: false });
+        this.handlePlayFinish();
+      }
+    }, this.state.interval);
   }
 
   handlePlayFinish() {
+    this.props.activateCrash();
     setTimeout(() => {
-      this.setState({ countDown: true });
+      this.props.enablePlayerEntry();
     }, 4000);
   }
 
@@ -70,22 +75,35 @@ export default class Play extends Component {
 
   render() {
     // console.log(this.state);
-    const { countDown, playCounterValue, crashAt, playing } = this.state;
+    const { playCounterValue, crashAt, playing } = this.state;
     return [
       <Graph
         playCounterValue={playCounterValue}
         crashAt={crashAt}
-        countDown={countDown}
         onPlayFinish={this.handlePlayFinish}
         onCountDownFinish={this.handleCountDownFinish}
         udateCounter={this.updateCounterForOtherComponents}
         playing={playing}
         key="graph"
       />,
-      <Bet key="bet" isCountDonw={countDown} playCounterValue={playCounterValue} />
+      <Bet key="bet" playCounterValue={playCounterValue} />
     ];
   }
 }
 
 // Props Validation
-Play.propTypes = {};
+Play.propTypes = {
+  enablePlayerEntry: PropTypes.func,
+  disablePlayerEntry: PropTypes.func
+};
+
+const mapStateToProps = state => {
+  return {
+    playerEntryActive: state.ui.playerEntryActive
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { enablePlayerEntry, disablePlayerEntry, activateCrash }
+)(Play);

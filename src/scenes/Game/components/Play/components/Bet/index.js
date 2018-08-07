@@ -144,16 +144,34 @@ class Bet extends Component {
     super();
     this.state = {
       betValue: '1',
-      betAutoCash: '2'
+      autoCashAt: '2'
     };
+
+    this.handleValueUpdate = this.handleValueUpdate.bind(this);
   }
 
   componentDidMount() {
     this.input.focus();
   }
 
+  handleValueUpdate(value, key) {
+    if (key === 'betValue' && Number(this.props.balance) < Number(value)) {
+      this.setState({ betValue: this.props.balance });
+    } else {
+      this.setState({ [key]: value });
+    }
+  }
+
   render() {
-    const { playerEntryActive, playCounterValue } = this.props;
+    const {
+      playerEntryActive,
+      playCounterValue,
+      balance,
+      betActive,
+      addNewBet,
+      crashActive
+    } = this.props;
+    const { betValue, autoCashAt } = this.state;
 
     return (
       <Wrap playerEntryActive={playerEntryActive}>
@@ -167,6 +185,13 @@ class Bet extends Component {
           <Input
             type="number"
             placeholder="1"
+            min="1"
+            step="0.1"
+            max={balance}
+            value={betValue}
+            onChange={ev => {
+              this.handleValueUpdate(ev.target.value, 'betValue');
+            }}
             innerRef={el => {
               this.input = el;
             }}
@@ -177,16 +202,37 @@ class Bet extends Component {
         </CurrencyWrap>
         <AutoWrap>
           <label>Auto cashout at: </label>
-          <Input type="number" placeholder="2" />
+          <Input
+            type="number"
+            min="1.01"
+            step="0.01"
+            placeholder="2"
+            value={autoCashAt}
+            onChange={ev => {
+              this.handleValueUpdate(ev.target.value, 'autoCashAt');
+            }}
+          />
           <span>x</span>
         </AutoWrap>
-        <Button2
-          onClick={() => {
-            console.log(playCounterValue);
-          }}
-        >
-          Plce bet
-        </Button2>
+        {betActive ? (
+          <Button2
+            onClick={() => {
+              !playerEntryActive && console.log(playCounterValue);
+            }}
+          >
+            {!playerEntryActive && !crashActive && `Cash out @ ${playCounterValue.toFixed(2)} x`}
+            {!playerEntryActive && crashActive && 'Noooooo....'}
+            {playerEntryActive && 'Wait...'}
+          </Button2>
+        ) : (
+          <Button2
+            onClick={() => {
+              playerEntryActive && addNewBet(betValue, autoCashAt);
+            }}
+          >
+            {playerEntryActive ? 'Plce bet' : 'Wait for next entry'}
+          </Button2>
+        )}
       </Wrap>
     );
   }
@@ -195,13 +241,19 @@ class Bet extends Component {
 // Props Validation
 Bet.propTypes = {
   activeToken: PropTypes.string,
-  playerEntryActive: PropTypes.bool
+  playerEntryActive: PropTypes.bool,
+  balance: PropTypes.string,
+  betActive: PropTypes.bool,
+  crashActive: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     activeToken: state.ui.activeToken,
-    playerEntryActive: state.ui.playerEntryActive
+    playerEntryActive: state.ui.playerEntryActive,
+    betActive: state.bet.value !== '',
+    balance: state.accounts.find(a => a.token === state.ui.activeToken).balance,
+    crashActive: state.ui.crashActive
   };
 };
 

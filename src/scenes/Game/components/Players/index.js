@@ -53,14 +53,29 @@ class Players extends Component {
         symbol: this.state.tokenIcon,
         bonus: Math.floor(getValue(0, 9) * 100) / 100,
         profit: '',
-        at: ''
+        at: '',
+        me: false
       };
       this.setState({ players: [...this.state.players, player] });
     }, 75);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { activeToken, playerEntryActive } = this.props;
+    const { activeToken, playerEntryActive, bet } = this.props;
+
+    if (bet.value !== nextProps.bet.value && nextProps.bet.value !== '') {
+      const nextPlayers = this.state.players.slice(0);
+      nextPlayers.unshift({
+        username: 'DemoUser',
+        bet: nextProps.bet.value,
+        symbol: this.state.tokenIcon,
+        bonus: Math.floor(getValue(0, 9) * 100) / 100,
+        profit: '',
+        at: '',
+        me: true
+      });
+      this.setState({ players: nextPlayers });
+    }
 
     if (activeToken !== nextProps.activeToken) {
       const token = crypto.find(c => c.token === nextProps.activeToken);
@@ -71,22 +86,23 @@ class Players extends Component {
       this.setState({ players: nextPlayers, tokenIcon: token.icon });
     }
 
-    if (nextProps.playerEntryActive) {
+    if (nextProps.playerEntryActive && playerEntryActive !== nextProps.playerEntryActive) {
       this.loadPlayersWithInterval();
       this.setState({ players: [] });
     }
   }
 
-  componentWillUpdate() {
-    const { players } = this.state;
+  componentWillUpdate(nextProps, nextState) {
+    const { players } = nextState;
     const { playerEntryActive } = this.props;
-    if (players.length > 15 && playerEntryActive) {
+    if (playerEntryActive && players.length > 15) {
       clearInterval(this.loader);
     }
   }
 
   render() {
     const { players } = this.state;
+    // console.log('from player', this.props);
     return (
       <Wrap>
         <Table widthGrid={[1, 1, 1, 1]}>
@@ -117,11 +133,10 @@ class Players extends Component {
 
 // Props Validation
 Players.propTypes = {
-  bet: PropTypes.shape({
-    betValue: PropTypes.string,
-    betAutoCash: PropTypes.string,
-    betActive: PropTypes.bool
-  }),
+  // bet: PropTypes.shape({
+  //   value: PropTypes.string,
+  //   autoCashAt: PropTypes.string
+  // }),
   activeToken: PropTypes.string,
   playerEntryActive: PropTypes.bool
 };

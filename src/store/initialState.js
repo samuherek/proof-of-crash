@@ -16,10 +16,8 @@ export default {
     { name: '0x', token: 'ZRX', balance: '894' }
   ],
   bet: {
-    betActive: false,
-    betCurrency: 'ETH',
-    betValue: '1',
-    betAutoCash: '2'
+    value: '',
+    autoCashAt: ''
   },
   ui: {
     activeToken: 'REP',

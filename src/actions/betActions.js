@@ -1,11 +1,11 @@
 import * as types from './actionTypes';
 
-export function addNewBet(bet) {
+export function addNewBet(betValue, autoCashAt) {
   return {
     type: types.ADD_NEW_BET,
     payload: {
-      betValue: bet.value,
-      betAutoCash: bet.autoCash
+      betValue,
+      autoCashAt
     }
   };
 }

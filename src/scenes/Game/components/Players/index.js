@@ -37,9 +37,15 @@ class Players extends Component {
       players: [],
       tokenIcon: crypto.find(c => c.token === props.activeToken).icon
     };
+
+    this.loadPlayersWithInterval = this.loadPlayersWithInterval.bind(this);
   }
 
   componentDidMount() {
+    this.loadPlayersWithInterval();
+  }
+
+  loadPlayersWithInterval() {
     this.loader = setInterval(() => {
       const player = {
         username: usernames[Math.floor(Math.random() * 83)],
@@ -54,7 +60,9 @@ class Players extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.activeToken !== nextProps.activeToken) {
+    const { activeToken, playerEntryActive } = this.props;
+
+    if (activeToken !== nextProps.activeToken) {
       const token = crypto.find(c => c.token === nextProps.activeToken);
       const nextPlayers = this.state.players.map(player => {
         player.symbol = token.icon;
@@ -62,10 +70,17 @@ class Players extends Component {
       });
       this.setState({ players: nextPlayers, tokenIcon: token.icon });
     }
+
+    if (nextProps.playerEntryActive) {
+      this.loadPlayersWithInterval();
+      this.setState({ players: [] });
+    }
   }
 
   componentWillUpdate() {
-    if (this.state.players.length > 15) {
+    const { players } = this.state;
+    const { playerEntryActive } = this.props;
+    if (players.length > 15 && playerEntryActive) {
       clearInterval(this.loader);
     }
   }
@@ -107,13 +122,15 @@ Players.propTypes = {
     betAutoCash: PropTypes.string,
     betActive: PropTypes.bool
   }),
-  activeToken: PropTypes.string
+  activeToken: PropTypes.string,
+  playerEntryActive: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
     bet: state.bet,
-    activeToken: state.ui.activeToken
+    activeToken: state.ui.activeToken,
+    playerEntryActive: state.ui.playerEntryActive
   };
 };
 

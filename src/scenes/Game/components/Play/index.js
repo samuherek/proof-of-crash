@@ -1,18 +1,20 @@
 // NPM
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 // COMPONENTS
 import Bet from './components/Bet';
 import Graph from './components/Graph';
 
 // ACTIONS/CONFIG
+import Utils from '../../../../utils/Utils';
 import {
   disablePlayerEntry,
   enablePlayerEntry,
   activateCrash
 } from '../../../../actions/uiActions';
-import { connect } from '../../../../../node_modules/react-redux';
+import { crashedWithBet } from '../../../../actions/betActions';
 
 // MODULE
 class Play extends Component {
@@ -20,7 +22,7 @@ class Play extends Component {
     super();
     this.state = {
       playCounterValue: 1,
-      crashAt: Math.floor(Math.random() * 1000) / 100 + 1,
+      crashAt: Utils.getCrashValue(1.01, 12),
       interval: 30
     };
 
@@ -33,7 +35,7 @@ class Play extends Component {
   }
 
   setNewCrashValue() {
-    this.setState({ crashAt: (Math.floor(Math.random() * 1000) / 100 + 1).toFixed(2) });
+    this.setState({ crashAt: Utils.getCrashValue(1.01, 12) });
   }
 
   udpatePlayerCounter() {
@@ -62,8 +64,10 @@ class Play extends Component {
   }
 
   handlePlayFinish() {
+    this.props.crashedWithBet();
     this.props.activateCrash();
     setTimeout(() => {
+      this.setState({ playCounterValue: 1 });
       this.props.enablePlayerEntry();
     }, 4000);
   }
@@ -105,5 +109,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { enablePlayerEntry, disablePlayerEntry, activateCrash }
+  { enablePlayerEntry, disablePlayerEntry, activateCrash, crashedWithBet }
 )(Play);

@@ -2,7 +2,7 @@
 export default {
   accounts: [
     { name: 'Aeternity', token: 'AE', balance: '1523' },
-    { name: 'Basic Attention Token', token: 'BAT', balance: '0' },
+    { name: 'Basic Attention Token', token: 'BAT', balance: '1' },
     { name: 'Binance Coin', token: 'BNB', balance: '20' },
     { name: 'Etherium', token: 'ETH', balance: '234.12' },
     { name: 'Gnosis', token: 'GNO', balance: '126' },

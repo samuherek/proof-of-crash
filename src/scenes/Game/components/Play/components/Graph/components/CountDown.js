@@ -10,20 +10,14 @@ import styled, { keyframes } from 'styled-components';
 // STYLES
 const pulse = keyframes`
   0% {
-    // top: -1px;
-    box-shadow: 0 0 0 0 rgba(66, 207, 160, 0.4);
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
   }
-  
-  // 50% {
-  //   top: 2px;
-  // }
 
   70% {
-      box-shadow: 0 0 0 30px rgba(66, 207, 160, 0);
+      box-shadow: 0 0 0 30px rgba(255,255,255, 0);
   }
   100% {
-    // top: -1px;
-      box-shadow: 0 0 0 0 rgba(66, 207, 160, 0);
+      box-shadow: 0 0 0 0 rgba(255,255,255, 0);
   }
 `;
 

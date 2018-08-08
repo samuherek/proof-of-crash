@@ -12,6 +12,7 @@ export default function betReducer(state = initialState.bet, action) {
       };
     }
 
+    case types.CASH_OUT:
     case types.ENABLE_PLAYER_ENTRY: {
       return {
         ...state,

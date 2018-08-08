@@ -10,6 +10,7 @@ import THead from '../../../../components/Table/THead';
 import TBody from '../../../../components/Table/TBody';
 
 // ACTIONS/CONFIG
+import Utils from '../../../../utils/Utils';
 import usernames from '../../../../data/usernames';
 import crypto from '../../../../data/crypto';
 
@@ -35,7 +36,8 @@ class Players extends Component {
     super(props);
     this.state = {
       players: [],
-      tokenIcon: crypto.find(c => c.token === props.activeToken).icon
+      tokenIcon: crypto.find(c => c.token === props.activeToken).icon,
+      playersCount: 0
     };
 
     this.loadPlayersWithInterval = this.loadPlayersWithInterval.bind(this);
@@ -53,10 +55,14 @@ class Players extends Component {
         symbol: this.state.tokenIcon,
         bonus: Math.floor(getValue(0, 9) * 100) / 100,
         profit: '',
+        autoCashAt: Utils.getCrashValue(),
         at: '',
         me: false
       };
-      this.setState({ players: [...this.state.players, player] });
+      this.setState({
+        players: [...this.state.players, player],
+        playersCount: this.state.playersCount + 1
+      });
     }, 75);
   }
 
@@ -71,6 +77,7 @@ class Players extends Component {
         symbol: this.state.tokenIcon,
         bonus: Math.floor(getValue(0, 9) * 100) / 100,
         profit: '',
+        autoCashAt: Utils.getCrashValue(),
         at: '',
         me: true
       });
@@ -87,16 +94,18 @@ class Players extends Component {
     }
 
     if (nextProps.playerEntryActive && playerEntryActive !== nextProps.playerEntryActive) {
-      this.loadPlayersWithInterval();
       this.setState({ players: [] });
+      this.loadPlayersWithInterval();
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    const { players } = nextState;
+  componentDidUpdate() {
+    const { players } = this.state;
     const { playerEntryActive } = this.props;
-    if (playerEntryActive && players.length > 15) {
+
+    if (playerEntryActive && players.length > 15 && this.loader) {
       clearInterval(this.loader);
+      this.loader = null;
     }
   }
 

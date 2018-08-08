@@ -55,7 +55,7 @@ class Players extends Component {
         symbol: this.state.tokenIcon,
         bonus: Math.floor(getValue(0, 9) * 100) / 100,
         profit: '',
-        autoCashAt: Utils.getCrashValue(),
+        autoCashAt: Utils.getCrashValue(1.01, 12),
         at: '',
         me: false
       };
@@ -102,8 +102,9 @@ class Players extends Component {
   componentDidUpdate() {
     const { players } = this.state;
     const { playerEntryActive } = this.props;
+    if (!this.loader) return;
 
-    if (playerEntryActive && players.length > 15 && this.loader) {
+    if (playerEntryActive && players.length > 15) {
       clearInterval(this.loader);
       this.loader = null;
     }
@@ -111,6 +112,7 @@ class Players extends Component {
 
   render() {
     const { players } = this.state;
+    const { playCounterValue, crashActive } = this.props;
     // console.log('from player', this.props);
     return (
       <Wrap>
@@ -126,6 +128,8 @@ class Players extends Component {
           />
           <TBody
             data={players}
+            playCounterValue={playCounterValue}
+            crashActive={crashActive}
             rowSchema={[
               { ref: 'username' },
               { ref: 'at' },
@@ -154,7 +158,8 @@ const mapStateToProps = state => {
   return {
     bet: state.bet,
     activeToken: state.ui.activeToken,
-    playerEntryActive: state.ui.playerEntryActive
+    playerEntryActive: state.ui.playerEntryActive,
+    crashActive: state.ui.crashActive
   };
 };
 

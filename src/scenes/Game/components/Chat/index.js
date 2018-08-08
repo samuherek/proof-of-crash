@@ -107,13 +107,29 @@ const Message = styled.span`
   color: #a0a0a0;
 `;
 
+const getComments = () => {
+  const nextComments = comments.slice(0, 100).map(c => {
+    c.body = c.body.substring(0, Math.floor(Math.random() * 75) + 5);
+    return c;
+  });
+  return nextComments;
+};
+
 // MODULE
 export default class Chat extends Component {
+  constructor() {
+    super();
+    this.state = {
+      commentArr: getComments()
+    };
+  }
+
   componentDidMount() {
     this.chat.scrollTop = this.chat.scrollHeight;
   }
 
   render() {
+    const { commentArr } = this.state;
     return (
       <Wrap>
         <Tabs>
@@ -126,10 +142,10 @@ export default class Chat extends Component {
               this.chat = el;
             }}
           >
-            {comments.map(comment => (
+            {commentArr.map(comment => (
               <MessageWrap key={comment.id}>
                 <Username colored={comment.id % 7 !== 0}>{comment.username}:</Username>
-                <Message>{comment.body.substring(0, Math.floor(Math.random() * 75) + 5)}</Message>
+                <Message>{comment.body}</Message>
               </MessageWrap>
             ))}
           </ChatWrap>

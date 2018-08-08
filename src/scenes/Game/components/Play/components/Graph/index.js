@@ -19,35 +19,35 @@ const Wrap = styled.div`
 `;
 
 // MODULE
-class Graph extends Component {
-  render() {
-    const {
-      playerEntryActive,
-      onCountDownFinish,
-      onPlayFinish,
-      crashAt,
-      playCounterValue
-    } = this.props;
-
-    if (playerEntryActive) {
-      return (
-        <Wrap>
-          <CountDown onCountDownFinish={onCountDownFinish} />
-        </Wrap>
-      );
-    }
-
+const Graph = ({
+  playerEntryActive,
+  onCountDownFinish,
+  onPlayFinish,
+  crashAt,
+  playCounterValue
+}) => {
+  if (playerEntryActive) {
     return (
       <Wrap>
-        <Chart onCrashFinish={onPlayFinish} crashAt={crashAt} playCounterValue={playCounterValue} />
+        <CountDown onCountDownFinish={onCountDownFinish} />
       </Wrap>
     );
   }
-}
+
+  return (
+    <Wrap>
+      <Chart onCrashFinish={onPlayFinish} crashAt={crashAt} playCounterValue={playCounterValue} />
+    </Wrap>
+  );
+};
 
 // Props Validation
 Graph.propTypes = {
-  playerEntryActive: PropTypes.bool
+  playerEntryActive: PropTypes.bool,
+  onCountDownFinish: PropTypes.func,
+  onPlayFinish: PropTypes.func,
+  crashAt: PropTypes.number,
+  playCounterValue: PropTypes.number
 };
 
 const mapStateToProps = state => {

@@ -99,7 +99,7 @@ const BetInputs = ({
 
   return [
     <CurrencyWrap>
-      <label>Bet: </label>
+      <label>Your bet: </label>
       <Input
         type="number"
         placeholder="1"

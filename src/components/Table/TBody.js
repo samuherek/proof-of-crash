@@ -44,21 +44,23 @@ const TRowBody = TRow.extend`
   }
 
   &:before {
-    background: linear-gradient(
-      to right,
-      rgba(122, 23, 23, 0.75) 0%,
-      rgba(30, 87, 153, 0) 75%,
-      rgba(125, 185, 232, 0) 100%
-    );
+    background: rgba(122, 23, 23, 0.75);
+    // background: linear-gradient(
+    //   to right,
+    //   rgba(122, 23, 23, 0.75) 0%,
+    //   rgba(30, 87, 153, 0) 75%,
+    //   rgba(125, 185, 232, 0) 100%
+    // );
   }
 
   &:after {
-    background: linear-gradient(
-      to right,
-      rgba(${props => Utils.hexToRgb(props.theme.colors.highlight)}, 0.4) 0%,
-      rgba(30, 87, 153, 0) 75%,
-      rgba(125, 185, 232, 0) 100%
-    );
+    background: rgba(${props => Utils.hexToRgb(props.theme.colors.highlight)}, 0.4);
+    // background: linear-gradient(
+    //   to right,
+    //   rgba(${props => Utils.hexToRgb(props.theme.colors.highlight)}, 0.4) 0%,
+    //   rgba(30, 87, 153, 0) 75%,
+    //   rgba(125, 185, 232, 0) 100%
+    // );
   }
 
   ${props =>
@@ -68,12 +70,12 @@ const TRowBody = TRow.extend`
         opacity: 1;
       }
     `} ${props =>
-    props.won &&
-    css`
-      &:after {
-        opacity: 1;
-      }
-    `};
+  props.won &&
+  css`
+    &:after {
+      opacity: 1;
+    }
+  `};
 `;
 
 // const At = (counter, cashAt) => {

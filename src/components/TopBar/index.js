@@ -49,9 +49,13 @@ const Logo = styled(Link)`
 
   svg {
     display: inline-block;
-    width: 50px;
+    width: 66px;
     fill: ${props => props.theme.colors.highlight};
-    margin-right: 15px;
+    margin-right: 12px;
+  }
+
+  span {
+    font-weight: bold;
   }
 `;
 

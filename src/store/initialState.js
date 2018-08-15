@@ -20,7 +20,7 @@ export default {
     autoCashAt: ''
   },
   ui: {
-    activeToken: 'REP',
+    activeToken: 'BNB',
     playerEntryActive: true,
     crashActive: false
   }

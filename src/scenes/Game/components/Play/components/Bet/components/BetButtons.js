@@ -33,7 +33,7 @@ export default function BetButtons({ onAddBet, onCashOut, status, playCounter })
         {status.playingNoBet && 'Wait for next entry'}
         {status.crashedWithBet && 'Noooooo....'}
         {status.entryActiveWithBet && 'Wait...'}
-        {status.entryActiveNoBet && 'Plce bet'}
+        {status.entryActiveNoBet && 'Place bet'}
       </span>
     </ButtonB>
   );
